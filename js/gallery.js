@@ -98,16 +98,19 @@ galleryRef.addEventListener('click', e => {
   const instance = basicLightbox.create(
     `
     <div class="modal">
-       <img src="${e.target.dataset.source}">
+       <img src="${e.target.dataset.source}" >
     </div>
-`
+    `,
+    {
+      onShow: instance => {
+        const modalImg = instance.element().querySelector('img');
+
+        modalImg.addEventListener('click', () => {
+          instance.close();
+        });
+      },
+    }
   );
 
   instance.show();
-});
-
-const myImageRef = document.querySelector('instance');
-
-myImageRef.addEventListener('click', () => {
-  instance.close();
 });
